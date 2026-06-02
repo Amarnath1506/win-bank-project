@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WIN Bank</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginPage" class="login-container">
+  <div class="login-left">
+    <div>
+      <h1>🏦 WIN Bank</h1>
+      <h2>Modern Digital Banking Platform</h2>
+      <p>Secure banking portal for customers and administrators.</p>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-card">
+      <h2>Sign In</h2>
+
+      <select id="role">
+        <option value="">Select Role</option>
+        <option value="customer">Customer</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <input type="email" id="email" placeholder="Enter email">
+      <input type="password" id="password" placeholder="Enter password">
+
+      <button onclick="login()">Login</button>
+
+      <div class="demo-box">
+        <h4>Demo Credentials</h4>
+        <p><b>Customer:</b> customer@winbank.in / Customer@123</p>
+        <p><b>Admin:</b> admin@winbank.in / Admin@123</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="appPage" class="hidden">
+
+<div class="sidebar">
+<h2>🏦 WIN Bank</h2>
+
+<div class="nav active" onclick="showPage('dashboard',this)">Dashboard</div>
+<div class="nav" onclick="showPage('accounts',this)">Accounts</div>
+<div class="nav" onclick="showPage('transactions',this)">Transactions</div>
+<div class="nav" onclick="showPage('transfer',this)">Fund Transfer</div>
+<div class="nav" onclick="showPage('bill',this)">Bill Payments</div>
+<div class="nav" onclick="showPage('beneficiaries',this)">Beneficiaries</div>
+<div class="nav" onclick="showPage('cards',this)">Card Management</div>
+<div class="nav" onclick="showPage('loans',this)">Loan Requests</div>
+<div class="nav" onclick="showPage('statements',this)">Statements</div>
+<div class="nav admin-only hidden" onclick="showPage('admin',this)">Admin Panel</div>
+
+<button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="main">
+
+<div class="topbar">
+<h2 id="pageTitle">Dashboard</h2>
+<div id="loggedUser"></div>
+</div>
+
+<div id="dashboard" class="page active">
+<div class="cards">
+<div class="card"><h4>Total Balance</h4><h2 id="balance">₹2,45,000</h2></div>
+<div class="card"><h4>Total Transactions</h4><h2 id="txnCount">12</h2></div>
+<div class="card"><h4>Bill Payments</h4><h2>6</h2></div>
+<div class="card"><h4>Loan Eligibility</h4><h2>₹15L</h2></div>
+</div>
+
+<div class="section">
+<h3>Recent Transactions</h3>
+<table>
+<thead>
+<tr><th>Description</th><th>Amount</th><th>Status</th></tr>
+</thead>
+<tbody id="dashboardTxn">
+<tr><td>Salary Credit</td><td>₹75,000</td><td>Completed</td></tr>
+<tr><td>Electricity Bill</td><td>₹2,000</td><td>Completed</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="accounts" class="page">
+<div class="section">
+<h3>Account Summary</h3>
+
+<div class="cards">
+<div class="card">
+<h4>Savings Account</h4>
+<h2>XXXX4521</h2>
+<p id="accountBalance">₹2,45,000</p>
+</div>
+
+<div class="card">
+<h4>Current Account</h4>
+<h2>XXXX8921</h2>
+<p>₹75,000</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="transactions" class="page">
+<div class="section">
+<h3>Transaction Summary</h3>
+
+<table>
+<thead>
+<tr>
+<th>Description</th>
+<th>Amount</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="txnTable">
+<tr><td>Salary Credit</td><td>₹75,000</td><td>Completed</td></tr>
+<tr><td>Electricity Bill</td><td>₹2,000</td><td>Completed</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="transfer" class="page">
+<div class="section">
+<h3>Fund Transfer</h3>
+
+<input id="beneficiary" placeholder="Beneficiary Name">
+<input id="transferAmount" placeholder="Transfer Amount">
+<input id="transferOtp" placeholder="OTP">
+
+<button onclick="fundTransfer()">Transfer Funds</button>
+</div>
+</div>
+
+<div id="bill" class="page">
+<div class="section">
+<h3>Bill Payments</h3>
+
+<select id="billType">
+<option>Electricity</option>
+<option>Water</option>
+<option>Gas</option>
+<option>Broadband</option>
+<option>Mobile Recharge</option>
+<option>Credit Card</option>
+</select>
+
+<input id="billAmount" placeholder="Bill Amount">
+<input id="billOtp" placeholder="OTP">
+
+<button onclick="payBill()">Pay Bill</button>
+</div>
+</div>
+
+<div id="beneficiaries" class="page">
+<div class="section">
+<h3>Beneficiary Management</h3>
+<ul>
+<li>Ramesh Kumar</li>
+<li>Suresh Kumar</li>
+<li>Vendor Payments</li>
+</ul>
+</div>
+</div>
+
+<div id="cards" class="page">
+<div class="section">
+<h3>Card Management</h3>
+<p>Manage debit and credit cards.</p>
+</div>
+</div>
+
+<div id="loans" class="page">
+<div class="section">
+<h3>Loan Requests</h3>
+<p>Apply and track personal/home loans.</p>
+</div>
+</div>
+
+<div id="statements" class="page">
+<div class="section">
+<h3>Account Statements</h3>
+<button onclick="downloadStatement()">Download Statement</button>
+</div>
+</div>
+
+<div id="admin" class="page">
+<div class="section">
+<h3>Admin Dashboard</h3>
+
+<div class="cards">
+<div class="card"><h4>Total Customers</h4><h2>12,540</h2></div>
+<div class="card"><h4>Fraud Alerts</h4><h2>8</h2></div>
+<div class="card"><h4>Transactions Today</h4><h2>3,210</h2></div>
+<div class="card"><h4>Bill Payments</h4><h2>932</h2></div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Customer</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>John</td>
+<td>Active</td>
+<td><button>Freeze</button></td>
+</tr>
+<tr>
+<td>David</td>
+<td>Active</td>
+<td><button>View</button></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
